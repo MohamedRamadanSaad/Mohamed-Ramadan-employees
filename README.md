@@ -1,9 +1,30 @@
-# Mohamed-Ramadan-employees
-Find out the pair of employees who have worked as a team the longest
+# Employe Conjunction Task
 
-# Employe working overlap Task
 
-### About Task
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+<li><a href="#Task-Description">Task Description</a></li>
+   
+<li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+<li><a href="#Personal-Links">Personal Links</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
 Find out the pair of employees who have worked as a team the longest
 Input Data:
 * A CSV file with data in the following format:
@@ -15,20 +36,16 @@ Input Data:
 * ...
 * Sample output:
 * 143, 218, 8
-### Task Description
+## Task Description
 Create an application that identifies the pair of employees who have worked together on common projects for the longest period of time.
 
 Specifics:
 1) DateTo can be NULL, equivalent to today.
 2) The input data must be loaded to the program from a CSV file.
 
-### Reference Documentation
 
-For further reference, please consider the following sections:
 
-* [LinkedIn](https://www.linkedin.com/in/mohamedramadansaad/)
-
-### Guides
+### Built With
 
 The following guides illustrate how to use some features concretely:
 
@@ -37,4 +54,16 @@ The following guides illustrate how to use some features concretely:
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 
+For front-end 
+1) mvn clean install
+2) npm install
+3) run backend on port 8080 
 
+For back-end
+1) mvn clean install
+
+## Personal Links
+
+For further reference, please consider the following sections:
+
+* [LinkedIn](https://www.linkedin.com/in/mohamedramadansaad/)
