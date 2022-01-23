@@ -15,7 +15,6 @@
 <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -45,7 +44,7 @@ Specifics:
 
 
 
-### Built With
+## Built With
 
 The following guides illustrate how to use some features concretely:
 
@@ -53,7 +52,8 @@ The following guides illustrate how to use some features concretely:
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
-
+## Getting Started
+## Installation
 For front-end 
 1) mvn clean install
 2) npm install
