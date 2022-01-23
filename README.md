@@ -57,10 +57,11 @@ The following guides illustrate how to use some features concretely:
 For front-end 
 1) mvn clean install
 2) npm install
-3) run backend on port 8080 
+3) run backend on port 8090 
 
 For back-end
 1) mvn clean install
+2) 3) run frontend on port 9090
 
 ## Personal Links
 
