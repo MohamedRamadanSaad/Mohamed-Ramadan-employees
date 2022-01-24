@@ -27,9 +27,6 @@ import static java.util.stream.Collectors.groupingBy;
 @Component
 public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
 
-    private static final String dateFormat1= "dd/MM/yyyy";
-    private static final String dateFormat2= "yyyy-MM-dd";
-
     @Autowired
     private LoggerUtils loggerUtils;
 
@@ -102,9 +99,7 @@ public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
     }
 
     private   int findOverlapBetweenTwoDates(String emp1StartDate, String emp1EndDate, String emp2StartDate, String emp2EndDate) {
-//        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-//                .appendPattern(dateFormat2)
-//                .toFormatter();
+
         final String emp1StartStr = emp1StartDate;
         final String emp1EndStr = emp1EndDate;
         final String emp2StartStr = emp2StartDate;
@@ -114,22 +109,20 @@ public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
         final LocalDate i1End = !emp1EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp1EndStr):LocalDate.now();
         final LocalDate i2Start =correctDateAdapter(emp2StartStr);
         final LocalDate i2End = !emp2EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp2EndStr):LocalDate.now();
-        int numberOfOverlappingDates = 0;
+        int numberOfOverlappingDays = 0;
 
         if (i1End.isBefore(i1Start) || i2End.isBefore(i2Start)) {
             loggerUtils.logInfoMessage(this.getClass(),"Not proper intervals");
         } else {
             if (i1End.isBefore(i2Start) || i2End.isBefore(i1Start)) {
                 // no overlap
-                numberOfOverlappingDates = 0;
+                numberOfOverlappingDays = 0;
             } else {
                 final LocalDate laterStart = Collections.max(Arrays.asList(i1Start, i2Start));
                 final LocalDate earlierEnd = Collections.min(Arrays.asList(i1End, i2End));
-                numberOfOverlappingDates = (int) ChronoUnit.DAYS.between(laterStart, earlierEnd) +1;
+                numberOfOverlappingDays = (int) ChronoUnit.DAYS.between(laterStart, earlierEnd) +1;
             }
-//            loggerUtils.logInfoMessage(this.getClass(),""+numberOfOverlappingDates , " days of overlap");
-//            System.out.println("" + numberOfOverlappingDates + " days of overlap");
         }
-        return numberOfOverlappingDates;
+        return numberOfOverlappingDays;
     }
 }
