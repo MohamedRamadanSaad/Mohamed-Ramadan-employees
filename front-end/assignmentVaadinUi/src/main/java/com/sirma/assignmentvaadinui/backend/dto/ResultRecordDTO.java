@@ -8,8 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ResultRecordDTO {
-    private String projectId;
+    private Integer projectId;
     private String emp1Id;
     private String emp2Id;
-    private String days;
+    private Integer days;
 }

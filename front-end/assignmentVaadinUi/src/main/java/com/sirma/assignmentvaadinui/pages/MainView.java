@@ -10,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
+import java.util.Comparator;
 
 @Route(value = "")
 @PageTitle("Employee Work Overlap | Sirma")
@@ -43,9 +45,10 @@ public class MainView extends VerticalLayout {
         grid.setSizeFull();
         grid.addColumn(ResultRecordDTO::getEmp1Id).setHeader("Employee ID #1");
         grid.addColumn(ResultRecordDTO::getEmp2Id).setHeader("Employee ID #2");
-        grid.addColumn(ResultRecordDTO::getProjectId).setHeader("Project ID");
-        grid.addColumn(ResultRecordDTO::getDays).setHeader("Days worked");
+        grid.addColumn(ResultRecordDTO::getProjectId).setHeader("Project ID").setSortable(true);
+        grid.addColumn(ResultRecordDTO::getDays).setHeader("Days worked").setSortable(true);
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+        grid.setMultiSort(true);
     }
 
     private HorizontalLayout getToolbar(Grid<ResultRecordDTO> grid) {
@@ -63,7 +66,7 @@ public class MainView extends VerticalLayout {
 
             ResultsDTO resultsDTO = responseModel.getResultsDTO();
 
-            grid.setItems(resultsDTO.getResultRecordDTOS());
+            grid.setItems(resultsDTO.getResultRecordDTOS().stream().sorted(Comparator.comparingInt(ResultRecordDTO::getDays).reversed()));
         });
         add(singleFileUpload);
         HorizontalLayout toolbar = new HorizontalLayout(singleFileUpload);
