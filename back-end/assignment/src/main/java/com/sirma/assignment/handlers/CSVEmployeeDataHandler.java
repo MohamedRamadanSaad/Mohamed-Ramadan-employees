@@ -105,21 +105,21 @@ public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
         final String emp2StartStr = emp2StartDate;
         final String emp2EndStr = emp2EndDate;
 
-        final LocalDate i1Start = correctDateAdapter(emp1StartStr);
-        final LocalDate i1End = !emp1EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp1EndStr):LocalDate.now();
-        final LocalDate i2Start =correctDateAdapter(emp2StartStr);
-        final LocalDate i2End = !emp2EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp2EndStr):LocalDate.now();
+        final LocalDate employee1LocalStartDate = correctDateAdapter(emp1StartStr);
+        final LocalDate employee1LocalEndDate = !emp1EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp1EndStr):LocalDate.now();
+        final LocalDate employee2LocalStartDate =correctDateAdapter(emp2StartStr);
+        final LocalDate employee2LocalEndDate = !emp2EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp2EndStr):LocalDate.now();
         int numberOfOverlappingDays = 0;
 
-        if (i1End.isBefore(i1Start) || i2End.isBefore(i2Start)) {
+        if (employee1LocalEndDate.isBefore(employee1LocalStartDate) || employee2LocalEndDate.isBefore(employee2LocalStartDate)) {
             loggerUtils.logInfoMessage(this.getClass(),"Not proper intervals");
         } else {
-            if (i1End.isBefore(i2Start) || i2End.isBefore(i1Start)) {
+            if (employee1LocalEndDate.isBefore(employee2LocalStartDate) || employee2LocalEndDate.isBefore(employee1LocalStartDate)) {
                 // no overlap
                 numberOfOverlappingDays = 0;
             } else {
-                final LocalDate laterStart = Collections.max(Arrays.asList(i1Start, i2Start));
-                final LocalDate earlierEnd = Collections.min(Arrays.asList(i1End, i2End));
+                final LocalDate laterStart = Collections.max(Arrays.asList(employee1LocalStartDate, employee2LocalStartDate));
+                final LocalDate earlierEnd = Collections.min(Arrays.asList(employee1LocalEndDate, employee2LocalEndDate));
                 numberOfOverlappingDays = (int) ChronoUnit.DAYS.between(laterStart, earlierEnd) +1;
             }
         }
