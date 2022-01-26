@@ -54,7 +54,7 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 ## Getting Started
 ## Installation
-For front-end (This project use Vaadin Framework as a UI)
+For front-end (This project use Vaadin 14 Framework as a UI)
 1) mvn clean install
 2) npm install
 3) run backend on port 8090 
