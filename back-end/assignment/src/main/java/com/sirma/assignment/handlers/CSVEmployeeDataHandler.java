@@ -31,7 +31,7 @@ public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
     private LoggerUtils loggerUtils;
 
     @Override
-    public boolean isValidateCSVFile(MultipartFile file) {
+    public boolean isValidCSVFile(MultipartFile file) {
         loggerUtils.logInfoMessage(this.getClass(),"Validating uploaded file!");
         if (file.isEmpty() || !isCSVExtension(file)) {
             loggerUtils.logErrorMessage(this.getClass(),"Validation Failed!");
@@ -100,15 +100,10 @@ public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
 
     private   int findOverlapBetweenTwoDates(String emp1StartDate, String emp1EndDate, String emp2StartDate, String emp2EndDate) {
 
-        final String emp1StartStr = emp1StartDate;
-        final String emp1EndStr = emp1EndDate;
-        final String emp2StartStr = emp2StartDate;
-        final String emp2EndStr = emp2EndDate;
-
-        final LocalDate employee1LocalStartDate = correctDateAdapter(emp1StartStr);
-        final LocalDate employee1LocalEndDate = !emp1EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp1EndStr):LocalDate.now();
-        final LocalDate employee2LocalStartDate =correctDateAdapter(emp2StartStr);
-        final LocalDate employee2LocalEndDate = !emp2EndStr.equalsIgnoreCase("null")?correctDateAdapter(emp2EndStr):LocalDate.now();
+        final LocalDate employee1LocalStartDate = correctDateAdapter(emp1StartDate);
+        final LocalDate employee1LocalEndDate = !emp1EndDate.equalsIgnoreCase("null")?correctDateAdapter(emp1EndDate):LocalDate.now();
+        final LocalDate employee2LocalStartDate =correctDateAdapter(emp2StartDate);
+        final LocalDate employee2LocalEndDate = !emp2EndDate.equalsIgnoreCase("null")?correctDateAdapter(emp2EndDate):LocalDate.now();
         int numberOfOverlappingDays = 0;
 
         if (employee1LocalEndDate.isBefore(employee1LocalStartDate) || employee2LocalEndDate.isBefore(employee2LocalStartDate)) {
@@ -116,7 +111,7 @@ public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
         } else {
             if (employee1LocalEndDate.isBefore(employee2LocalStartDate) || employee2LocalEndDate.isBefore(employee1LocalStartDate)) {
                 // no overlap
-                numberOfOverlappingDays = 0;
+                return numberOfOverlappingDays;
             } else {
                 final LocalDate laterStart = Collections.max(Arrays.asList(employee1LocalStartDate, employee2LocalStartDate));
                 final LocalDate earlierEnd = Collections.min(Arrays.asList(employee1LocalEndDate, employee2LocalEndDate));
