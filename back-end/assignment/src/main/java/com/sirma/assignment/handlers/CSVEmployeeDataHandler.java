@@ -77,15 +77,17 @@ public class CSVEmployeeDataHandler extends CSVProcessingTemplate {
             loggerUtils.logInfoMessage(this.getClass(), "Project: ", project + " have employees > ", employees.toString());
             for (int i = 0; i < employees.size() - 1; i++) {
                 CSVEmployeeRecord emp1 = employees.get(i);
-                CSVEmployeeRecord emp2 = employees.get(i + 1);
-                int overlap = findOverlapBetweenTwoDates(emp1.getDateFrom(), emp1.getDateTo(), emp2.getDateFrom(), emp2.getDateTo());
-                if (overlap > 0) {
-                    ResultRecordDTO resultRecordDTO = new ResultRecordDTO();
-                    resultRecordDTO.setEmp1Id(emp1.getEmpId());
-                    resultRecordDTO.setEmp2Id(emp2.getEmpId());
-                    resultRecordDTO.setDays("" + overlap);
-                    resultRecordDTO.setProjectId(project);
-                    resultRecordDTOList.add(resultRecordDTO);
+                for (int j = i + 1; j < employees.size(); j++) {
+                    CSVEmployeeRecord emp2 = employees.get(j);
+                    int overlap = findOverlapBetweenTwoDates(emp1.getDateFrom(), emp1.getDateTo(), emp2.getDateFrom(), emp2.getDateTo());
+                    if (overlap > 0) {
+                        ResultRecordDTO resultRecordDTO = new ResultRecordDTO();
+                        resultRecordDTO.setEmp1Id(emp1.getEmpId());
+                        resultRecordDTO.setEmp2Id(emp2.getEmpId());
+                        resultRecordDTO.setDays("" + overlap);
+                        resultRecordDTO.setProjectId(project);
+                        resultRecordDTOList.add(resultRecordDTO);
+                    }
                 }
             }
             completeResultObject.setResultRecordDTOS(resultRecordDTOList);
